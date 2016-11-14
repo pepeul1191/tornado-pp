@@ -1,14 +1,23 @@
+#!/usr/bin/env python
+
+import tornado.httpserver
 import tornado.ioloop
 import tornado.web
+from tornado.options import options
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world =)")
+from settings import settings
+from urls import url_patterns
 
-application = tornado.web.Application([
-    (r"/", MainHandler),
-])
+class TornadoBoilerplate(tornado.web.Application):
+    def __init__(self):
+        tornado.web.Application.__init__(self, url_patterns, **settings)
+
+
+def main():
+    app = TornadoBoilerplate()
+    http_server = tornado.httpserver.HTTPServer(app)
+    http_server.listen(options.port)
+    tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
-    application.listen(8888)
-    tornado.ioloop.IOLoop.instance().start()
+    main()
