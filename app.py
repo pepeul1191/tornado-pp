@@ -8,10 +8,11 @@ from tornado.options import options
 from settings import settings
 from urls import url_patterns
 
+from helper import *
+
 class TornadoBoilerplate(tornado.web.Application):
     def __init__(self):
         tornado.web.Application.__init__(self, url_patterns, **settings)
-
 
 def main():
     app = TornadoBoilerplate()
