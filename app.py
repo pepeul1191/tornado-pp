@@ -15,10 +15,11 @@ class TornadoBoilerplate(tornado.web.Application):
         tornado.web.Application.__init__(self, url_patterns, **settings)
 
 def main():
-    app = TornadoBoilerplate()
-    http_server = tornado.httpserver.HTTPServer(app)
-    http_server.listen(options.port)
-    tornado.ioloop.IOLoop.instance().start()
+
+	app = TornadoBoilerplate()
+	http_server = tornado.httpserver.HTTPServer(app)
+	http_server.listen(options.port)
+	tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
     main()

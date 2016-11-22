@@ -18,3 +18,8 @@ class Helper:
 		url = self.accesos + "item/listar/menu/" + modulo
 		response = requests.get(url)
 		return response.text
+
+	@staticmethod
+	def get_url(key):
+		diccionario = {'BASE_URL': 'http://localhost:8888/', 'STATIC_URL': 'http://localhost:3001/dashboard'}
+		return diccionario[key]
