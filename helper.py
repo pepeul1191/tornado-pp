@@ -4,6 +4,7 @@
 # helper.py
 
 import requests
+import json
 
 class Helper:
 	def __init__(self):
@@ -30,3 +31,12 @@ class Helper:
 
 	def get(self, key):
 		return self.diccionario[key]
+
+	def array_to_json(self, string):
+		rpta = []
+		temps = json.loads(string)
+
+		for temp in temps:
+			rpta.append(json.loads(temp))
+
+		return rpta

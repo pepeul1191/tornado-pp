@@ -12,6 +12,7 @@ from handlers.seguridad.vulnerabilidad import *
 from handlers.seguridad.criticidad import *
 from handlers.seguridad.ubicacion import *
 from handlers.seguridad.riesgo import *
+from handlers.seguridad.grupo_activo import *
 
 url_patterns = [
     (r"/accesos", AccesosIndexHandler),
@@ -34,7 +35,12 @@ url_patterns = [
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     (r"/seguridad/maestros/amenazas", SeguridadAmenazasHandler),
     (r"/seguridad/maestros/amenazas/listar", SeguridadAmenazasListarHandler),
+    (r"/seguridad/maestros/amenazas/agregar", SeguridadAmenazasAgregarHandler),
+    (r"/seguridad/maestros/amenaza/editar/([0-9]+)", SeguridadAmenazaEditarHandler),
+    (r"/seguridad/maestros/amenaza/ver/([0-9]+)", SeguridadAmenazaVerHandler),
     (r"/seguridad/maestros/amenazas/guardar", SeguridadAmenazasGuardarHandler),
+    (r"/seguridad/maestros/amenaza/guardar", SeguridadAmenazaGuardarHandler),
+    (r"/seguridad/maestros/amenaza/asociar_grupo", SeguridadAmenazaAsociarGrupoHandler),
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     (r"/seguridad/maestros/capas", SeguridadCapasHandler),
     (r"/seguridad/maestros/capas/listar", SeguridadCapasListarHandler),
@@ -47,6 +53,10 @@ url_patterns = [
     (r"/seguridad/maestros/criticidades", SeguridadCriticidadesHandler),
     (r"/seguridad/maestros/criticidades/listar", SeguridadCriticidadesListarHandler),
     (r"/seguridad/maestros/criticidades/guardar", SeguridadCriticidadesGuardarHandler),
+    # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    (r"/seguridad/maestros/grupo_activos", SeguridadGrupoActivosHandler),
+    (r"/seguridad/maestros/grupo_activos/listar", SeguridadGrupoActivosListarHandler),
+    (r"/seguridad/maestros/grupo_activos/guardar", SeguridadGrupoActivosGuardarHandler),
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     (r"/seguridad/maestros/riesgos", SeguridadRiesgosHandler),
     (r"/seguridad/maestros/riesgos/listar", SeguridadRiesgosListarHandler),
