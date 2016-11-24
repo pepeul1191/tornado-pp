@@ -72,5 +72,10 @@ url_patterns = [
     # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     (r"/seguridad/maestros/vulnerabilidades", SeguridadVulnerabilidadesHandler),
     (r"/seguridad/maestros/vulnerabilidades/listar", SeguridadVulnerabilidadesListarHandler),
-    (r"/seguridad/maestros/vulnerabilidades/guardar", SeguridadVulnerabilidadesGuardarHandler)
+    (r"/seguridad/maestros/vulnerabilidades/agregar", SeguridadVulnerabilidadesAgregarHandler),
+    (r"/seguridad/maestros/vulnerabilidad/editar/([0-9]+)", SeguridadVulnerabilidadEditarHandler),
+    (r"/seguridad/maestros/vulnerabilidad/ver/([0-9]+)", SeguridadVulnerabilidadVerHandler),
+    (r"/seguridad/maestros/vulnerabilidades/guardar", SeguridadVulnerabilidadesGuardarHandler),
+    (r"/seguridad/maestros/vulnerabilidad/guardar", SeguridadVulnerabilidadGuardarHandler),
+    (r"/seguridad/maestros/vulnerabilidad/asociar_grupo", SeguridadVulnerabilidadAsociarGrupoHandler)
 ]
