@@ -3,16 +3,18 @@ from handlers.login import *
 from handlers.accesos import *
 
 from handlers.m_seguridad import *
-from handlers.seguridad.control import *
-from handlers.seguridad.tipo_activo import *
-from handlers.seguridad.agente import *
-from handlers.seguridad.amenaza import *
-from handlers.seguridad.capa import *
-from handlers.seguridad.vulnerabilidad import *
-from handlers.seguridad.criticidad import *
-from handlers.seguridad.ubicacion import *
-from handlers.seguridad.riesgo import *
-from handlers.seguridad.grupo_activo import *
+from handlers.seguridad.maestros.control import *
+from handlers.seguridad.maestros.tipo_activo import *
+from handlers.seguridad.maestros.agente import *
+from handlers.seguridad.maestros.amenaza import *
+from handlers.seguridad.maestros.capa import *
+from handlers.seguridad.maestros.vulnerabilidad import *
+from handlers.seguridad.maestros.criticidad import *
+from handlers.seguridad.maestros.ubicacion import *
+from handlers.seguridad.maestros.riesgo import *
+from handlers.seguridad.maestros.grupo_activo import *
+
+from handlers.seguridad.gestion.activo import *
 
 url_patterns = [
     (r"/accesos", AccesosIndexHandler),
@@ -77,5 +79,17 @@ url_patterns = [
     (r"/seguridad/maestros/vulnerabilidad/ver/([0-9]+)", SeguridadVulnerabilidadVerHandler),
     (r"/seguridad/maestros/vulnerabilidades/guardar", SeguridadVulnerabilidadesGuardarHandler),
     (r"/seguridad/maestros/vulnerabilidad/guardar", SeguridadVulnerabilidadGuardarHandler),
-    (r"/seguridad/maestros/vulnerabilidad/asociar_grupo", SeguridadVulnerabilidadAsociarGrupoHandler)
+    (r"/seguridad/maestros/vulnerabilidad/asociar_grupo", SeguridadVulnerabilidadAsociarGrupoHandler),
+
+    #(r"/seguridad/gestion/activos", SeguridadActivosHandler)
+    #(r"/seguridad/gestion/activos/listar", SeguridadActivosListarHandler),
+    #(r"/seguridad/gestion/activos/agregar", SeguridadActivosAgregarHandler),
+    #(r"/seguridad/gestion/activo/editar/([0-9]+)", SeguridadActivoEditarHandler),
+    #(r"/seguridad/gestion/activo/ver/([0-9]+)", SeguridadActivoVerHandler),
+    #(r"/seguridad/gestion/activos/guardar", SeguridadActivosGuardarHandler),
+    #(r"/seguridad/gestion/activo/guardar", SeguridadActivoGuardarHandler),
+    #(r"/seguridad/gestion/activo/asociar_control", SeguridadActivoAsociarControlHandler),
+    #(r"/seguridad/gestion/activo/asociar_vulnerabilidad", SeguridadActivoAsociarVulnerabilidadHandler),
+    #(r"/seguridad/gestion/activo/asociar_amenaza", SeguridadActivoAsociarAmenazaHandler),
+    #(r"/seguridad/gestion/activo/asociar_riesgo", SeguridadActivoAsociarRiegsoHandler)
 ]

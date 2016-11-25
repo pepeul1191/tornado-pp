@@ -1,0 +1,31 @@
+{% block title %}Seguridad / Maestros / Controles{% end %}
+{% extends "../../layouts/application.html" %}
+{% block stylesheet %}
+<link href="{{helper.get('STATICS_URL')}}swp/css/mootools.grid.css" rel="stylesheet" type="text/css"/>
+{% end %}
+
+
+{% block content %}
+<div class="row">
+	<h2 class="titulo">Seguridad / Maestros / Controles</h2>
+	<div class="row borde-bajo">
+		<h5 class="subtitulo">Gestione los Controles de Seguridad de los Activos de Información</h5>
+	</div>
+</div>
+</br>
+<div class="row">
+	<div class="col-md-12 workspace">
+		<label class="texto-der oculto" id="txtMensajeRpta"></label>
+		<table class="list issues" style="" id="tablaPermiso"></table>
+	</div>
+</div>
+{% end %}
+
+{% block javascript %}
+<script src="{{helper.get('STATICS_URL')}}swp/js/mootools.dao.js" type="text/javascript"></script>
+<script src="{{helper.get('STATICS_URL')}}swp/js/mootools.form.js" type="text/javascript"></script>
+<script src="{{helper.get('STATICS_URL')}}swp/js/mootools.observer.js" type="text/javascript"></script>
+<script src="{{helper.get('STATICS_URL')}}swp/js/mootools.grid.js" type="text/javascript"></script>
+<script src="{{helper.get('STATICS_URL')}}swp/js/mootools.chain.js" type="text/javascript"></script>
+<script src="{{helper.get('STATICS_URL')}}assets/seguridad/maestros/js/controles.js" type="text/javascript"></script>
+{% end %}
