@@ -81,9 +81,9 @@ url_patterns = [
     (r"/seguridad/maestros/vulnerabilidad/guardar", SeguridadVulnerabilidadGuardarHandler),
     (r"/seguridad/maestros/vulnerabilidad/asociar_grupo", SeguridadVulnerabilidadAsociarGrupoHandler),
 
-    #(r"/seguridad/gestion/activos", SeguridadActivosHandler)
-    #(r"/seguridad/gestion/activos/listar", SeguridadActivosListarHandler),
-    #(r"/seguridad/gestion/activos/agregar", SeguridadActivosAgregarHandler),
+    (r"/seguridad/gestion/activos", SeguridadActivosHandler),
+    (r"/seguridad/gestion/activos/listar", SeguridadActivosListarHandler),
+    (r"/seguridad/gestion/activos/agregar", SeguridadActivosAgregarHandler)
     #(r"/seguridad/gestion/activo/editar/([0-9]+)", SeguridadActivoEditarHandler),
     #(r"/seguridad/gestion/activo/ver/([0-9]+)", SeguridadActivoVerHandler),
     #(r"/seguridad/gestion/activos/guardar", SeguridadActivosGuardarHandler),

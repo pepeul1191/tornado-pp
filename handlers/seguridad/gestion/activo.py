@@ -17,7 +17,7 @@ class SeguridadActivosHandler(BaseHandler):
 			helper.set('menus', json.loads(helper.listar_menu("Seguridad")))
 			helper.set('activo', 'Seguridad')
 
-			self.render("seguridad/maestros/amenazas.html", helper = helper)
+			self.render("seguridad/gestion/activos.html", helper = helper)
 		else:
 			self.redirect('/login')
 
@@ -25,12 +25,38 @@ class SeguridadActivosListarHandler(BaseHandler):
     def get(self):
 		helper = Helper()
 		if self.get_secure_cookie("usuario") or helper.get('ambiente') != 'produccion':
-			url = helper.get('maestros') + "amenaza/listar"
+			url = helper.get('gestion') + "activo/listar"
 			response = requests.get(url)
 
 			self.write(response.text)
 		else:
 			self.write("El usuario debe estar logeado")
+
+class SeguridadActivosAgregarHandler(BaseHandler):
+    def get(self):
+		helper = Helper()
+		if self.get_secure_cookie("usuario") or helper.get('ambiente') != 'produccion':
+			helper.set('modulos', json.loads(helper.listar_modulos()))
+			helper.set('menus', json.loads(helper.listar_menu("Seguridad")))
+			helper.set('activo', 'Seguridad')
+
+			activo = json.loads('{"codigo":"","descripcion":""}')
+
+			vulnerabilidades = requests.get(helper.get('maestros') + "vulnerabilidad/listar")
+			vulnerabilidades = helper.array_to_json(vulnerabilidades.text)
+
+			amenazas = requests.get(helper.get('maestros') + "amenaza/listar")
+			amenazas = helper.array_to_json(amenazas.text)
+
+			controles = requests.get(helper.get('maestros') + "control/listar")
+			controles = helper.array_to_json(controles.text)
+
+			riesgos = requests.get(helper.get('maestros') + "riesgo/listar")
+			riesgos = helper.array_to_json(riesgos.text)
+
+			self.render("seguridad/gestion/activo.html", helper = helper, vulnerabilidades = vulnerabilidades, controles = controles, amenazas = amenazas, riesgos = riesgos, id = "E", titulo = "Agregar", subtitulo="Añada un activo de información con sus controles, vulnerabilidades, amenazas y riesgos correspondientes", activo = activo, disabled = "")
+		else:
+			self.redirect('/login')
 
 class SeguridadActivoEditarHandler(BaseHandler):
     def get(self, id_amenaza):
@@ -71,24 +97,6 @@ class SeguridadActivoVerHandler(BaseHandler):
 			self.render("seguridad/maestros/amenaza.html", helper = helper, grupo_activos = response, id = amenaza["id"], titulo = "Ver", amenaza = amenaza, subtitulo="Vea la amenza asociada con sus grupos de activos correspondientes", disabled = "disabled")
 		else:
 			self.write("El usuario debe estar logeado")
-
-class SeguridadActivosAgregarHandler(BaseHandler):
-    def get(self):
-		helper = Helper()
-		if self.get_secure_cookie("usuario") or helper.get('ambiente') != 'produccion':
-			helper.set('modulos', json.loads(helper.listar_modulos()))
-			helper.set('menus', json.loads(helper.listar_menu("Seguridad")))
-			helper.set('activo', 'Seguridad')
-
-			amenaza = json.loads('{"codigo":"","descripcion":""}')
-
-			url = helper.get('maestros') + "grupo_activo/listar"
-			response = requests.get(url)
-			response = helper.array_to_json(response.text)
-
-			self.render("seguridad/maestros/amenaza.html", helper = helper, grupo_activos = response, id = "E", titulo = "Agregar", subtitulo="Añada una nueva amenza asociada con sus grupos de activos correspondientes", amenaza = amenaza, disabled = "")
-		else:
-			self.redirect('/login')
 
 class SeguridadActivoGuardarHandler(BaseHandler):
 	def post(self):

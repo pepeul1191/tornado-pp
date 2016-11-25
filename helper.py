@@ -13,6 +13,7 @@ class Helper:
 			'STATICS_URL' : 'http://localhost:8001/dashboard/',
 			'accesos' : 'http://127.0.0.1:3000/',
 			'maestros' : 'http://127.0.0.1:3001/',
+			'gestion' : 'http://127.0.0.1:3002/',
 			'ambiente': 'desarrollo'
 		}
 
