@@ -23,19 +23,83 @@
     		<input type="text" class="form-control" id="txtCodigo" value="{{activo['codigo']}}" {{disabled}}>
   		</div>
   		<label for="txtDescripcion">Descripción</label>
-  		<textarea class="form-control" rows="5" id="txtDescripcion" {{disabled}}>{{activo['descripcion']}}</textarea>
-  		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnGuardarActivo"><i class="fa fa-check" aria-hidden="true"></i>Guardar Cambios</button>{% end %}
+  		<textarea class="form-control" rows="13" id="txtDescripcion" {{disabled}}>{{activo['descripcion']}}</textarea>
 	</div>
 	<div class="col-md-1 workspace"></div>
 	<div class="col-md-4 workspace">
-		<h1>RELACIONES CON CAPA, CRITICIDAD, UBICACION, TIPO ACTIVO Y AGENTE</h1>
+		<div class="form-group">
+    		<label for="slcCriticidad">Criticadad del Activo</label>
+    		<select class="form-control form-control-select" id="slcCriticidad" {{disabled}}>
+    			<option value="E"></option>
+    			{% for criticidad in criticidades %}
+    				{% if activo['criticidad_id'] == criticidad['id'] %}
+						<option value="{{criticidad['id']}}" selected>{{criticidad['grado']}}&nbsp;-&nbsp;{{criticidad['descripcion']}}</option>
+					{% else %}
+						<option value="{{criticidad['id']}}">{{criticidad['grado']}}&nbsp;-&nbsp;{{criticidad['descripcion']}}</option>
+					{% end %}
+				{% end %}
+			</select>
+  		</div>
+  		<div class="form-group">
+    		<label for="slcCapa">Capa del Activo</label>
+    		<select class="form-control form-control-select" id="slcCapa" {{disabled}}>
+				<option value="E"></option>
+    			{% for capa in capas %}
+    				{% if activo['capa_id'] == capa['id']%}
+						<option value="{{capa['id']}}" selected>{{capa['nombre']}}</option>
+					{% else %}
+						<option value="{{capa['id']}}">{{capa['nombre']}}</option>
+					{% end %}
+				{% end %}
+			</select>
+  		</div>
+  		<div class="form-group">
+    		<label for="slcUbicacion">Ubicación del Activo</label>
+    		<select class="form-control form-control-select" id="slcUbicacion" {{disabled}}>
+				<option value="E"></option>
+    			{% for ubicacion in ubicaciones %}
+    				{% if activo['ubicacion_id'] == ubicacion['id'] %}
+						<option value="{{ubicacion['id']}}" selected>{{ubicacion['nombre']}}</option>
+					{% else %}
+						<option value="{{ubicacion['id']}}">{{ubicacion['nombre']}}</option>
+					{% end %}
+				{% end %}
+			</select>
+  		</div>
+  		<div class="form-group">
+    		<label for="slcTipo">Tipo de Activo</label>
+    		<select class="form-control form-control-select" id="slcTipo" {{disabled}}>
+				<option value="E"></option>
+    			{% for tipo in tipo_activos %}
+    				{% if activo['tipo_activo_id'] == tipo['id']%}
+						<option value="{{tipo['id']}}" selected>{{tipo['nombre']}}</option>
+					{% else %}
+						<option value="{{tipo['id']}}">{{tipo['nombre']}}</option>
+					{% end %}
+				{% end %}
+			</select>
+  		</div>
+  		<div class="form-group">
+    		<label for="slcAgente">Agente Propietario del Activo</label>
+    		<select class="form-control form-control-select" id="slcAgente" {{disabled}}>
+    			<option value="E"></option>
+    			{% for agente in agentes %}
+    				{% if activo['agente_id'] == agente['id'] %}
+						<option value="{{agente['id']}}" selected>{{agente['codigo']}}&nbsp;-&nbsp;{{agente['descripcion']}}</option>
+					{% else %}
+						<option value="{{agente['id']}}">{{agente['codigo']}}&nbsp;-&nbsp;{{agente['descripcion']}}</option>
+					{% end %}
+				{% end %}
+			</select>
+  		</div>
+  		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnGuardarActivo"><i class="fa fa-check" aria-hidden="true"></i>Guardar Cambios</button>{% end %}
 	</div>
 </div>
 <hr>
 <div class="row">
 	<div class="col-md-3 workspace">
 		<label class="subtitulo_ascociacion">Controles</label>
-		<ul class="lista-sin-estilos" id="lista-grupos">
+		<ul class="lista-sin-estilos" id="lista-controles">
 			{% for control in controles %}
 	           <li>
 	           	{% if control['existe'] == 1%}
@@ -48,11 +112,11 @@
 	           </li>
 			{% end %}
 		</ul>
-		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarGrupos"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Criticidades</button>{% end %}
+		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarControles"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Criticidades</button>{% end %}
 	</div>
 	<div class="col-md-3 workspace">
 		<label class="subtitulo_ascociacion">Vulnerabilidades</label>
-		<ul class="lista-sin-estilos" id="lista-grupos">
+		<ul class="lista-sin-estilos" id="lista-vulnerabilidades">
 			{% for vulnerabilidad in vulnerabilidades %}
 	           <li>
 	           	{% if vulnerabilidad['existe'] == 1%}
@@ -65,11 +129,11 @@
 	           </li>
 			{% end %}
 		</ul>
-		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarGrupos"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Vulnerabilidades</button>{% end %}
+		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarVulnerabildades"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Vulnerabilidades</button>{% end %}
 	</div>
 	<div class="col-md-3 workspace">
 		<label class="subtitulo_ascociacion">Amenazas</label>
-		<ul class="lista-sin-estilos" id="lista-grupos">
+		<ul class="lista-sin-estilos" id="lista-amenazas">
 			{% for amenaza in amenazas %}
 	           <li>
 	           	{% if amenaza['existe'] == 1%}
@@ -82,11 +146,11 @@
 	           </li>
 			{% end %}
 		</ul>
-		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarGrupos"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Amenazas</button>{% end %}
+		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarAmenazas"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Amenazas</button>{% end %}
 	</div>
 	<div class="col-md-3 workspace">
 		<label class="subtitulo_ascociacion">Riesgos</label>
-		<ul class="lista-sin-estilos" id="lista-grupos">
+		<ul class="lista-sin-estilos" id="lista-riesgos">
 			{% for riesgo in riesgos %}
 	           <li>
 	           	{% if riesgo['existe'] == 1%}
@@ -99,12 +163,12 @@
 	           </li>
 			{% end %}
 		</ul>
-		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarGrupos"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Riesgos</button>{% end %}
+		{% if disabled != "disabled"%}<button type="button" class="btn btn-default" id="btnAsociarRiesgos"><i class="fa fa-plus" aria-hidden="true"></i>Asociar Riesgos</button>{% end %}
 	</div>
 </div>
 {% end %}
 
 {% block javascript %}
 <script src="{{helper.get('STATICS_URL')}}swp/js/mootools.dao.js" type="text/javascript"></script>
-<script src="{{helper.get('STATICS_URL')}}assets/seguridad/gestion/js/activos.js" type="text/javascript"></script>
+<script src="{{helper.get('STATICS_URL')}}assets/seguridad/gestion/js/activo.js" type="text/javascript"></script>
 {% end %}

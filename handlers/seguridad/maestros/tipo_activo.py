@@ -22,7 +22,7 @@ class SeguridadTipoActivosListarHandler(BaseHandler):
     def get(self):
 		helper = Helper()
 		if self.get_secure_cookie("usuario") or helper.get('ambiente') != 'produccion':
-			url = helper.get('maestros') + "grupo_activo/listar"
+			url = helper.get('maestros') + "tipo_activo/listar"
 			response = requests.get(url)
 
 			self.write(response.text)
@@ -34,7 +34,7 @@ class SeguridadTipoActivosGuardarHandler(BaseHandler):
 		helper = Helper()
 		if self.get_secure_cookie("usuario") or helper.get('ambiente') != 'produccion':
 			data = self.get_argument("data")
-			url = helper.get('maestros') + "grupo_activo/guardar?data=" + data
+			url = helper.get('maestros') + "tipo_activo/guardar?data=" + data
 			response = requests.get(url)
 
 			self.write(response.text)
